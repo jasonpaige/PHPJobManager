@@ -478,3 +478,15 @@ Stack trace:
 #1 /var/www/yii-1.1.8.r3324/framework/base/CApplication.php(158): CWebApplication->processRequest()
 #2 /var/www/PHPJobManager/index.php(13): CApplication->run()
 #3 {main} REQUEST_URI=/js/libs/modernizr-2.0.6.min.js
+2011/11/10 20:03:39 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/libs/modernizr-2.0.6.min.js".' in /var/www/yii-1.1.8.r3324/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /var/www/yii-1.1.8.r3324/framework/web/CWebApplication.php(136): CWebApplication->runController('js/libs/moderni...')
+#1 /var/www/yii-1.1.8.r3324/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /var/www/PHPJobManager/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/js/libs/modernizr-2.0.6.min.js
+2011/11/13 19:32:51 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/libs/modernizr-2.0.6.min.js".' in /var/www/yii-1.1.8.r3324/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /var/www/yii-1.1.8.r3324/framework/web/CWebApplication.php(136): CWebApplication->runController('js/libs/moderni...')
+#1 /var/www/yii-1.1.8.r3324/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /var/www/PHPJobManager/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/js/libs/modernizr-2.0.6.min.js

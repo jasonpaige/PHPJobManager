@@ -16,18 +16,15 @@ return array(
     'import'=>array(
         'application.models.*',
         'application.components.*',
+        'application.extensions.*',
     ),
 
     'modules'=>array(
-        // uncomment the following to enable the Gii tool
-        /*
         'gii'=>array(
             'class'=>'system.gii.GiiModule',
-            'password'=>'Enter Your Password Here',
-             // If removed, Gii defaults to localhost only. Edit carefully to taste.
+            'password'=>'root',
             'ipFilters'=>array('127.0.0.1','::1'),
         ),
-        */
     ),
 
     // application components
@@ -40,6 +37,7 @@ return array(
             'urlFormat'=>'path',
             'showScriptName'=>false,
             'rules'=>array(
+                'logout'=>'login/logout',
                 '<controller:\w+>/<id:\d+>'=>'<controller>/view',
                 '<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
                 '<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
@@ -53,22 +51,19 @@ return array(
             'charset' => 'utf8',
         ),
         'errorHandler'=>array(
-            // use 'site/error' action to display errors
-            'errorAction'=>'site/error',
+            'errorAction'=>'error',
         ),
         'log'=>array(
             'class'=>'CLogRouter',
             'routes'=>array(
-                array(
+                /*array(
                     'class'=>'CFileLogRoute',
                     'levels'=>'error, warning',
-                ),
-                // uncomment the following to show log messages on web pages
-                /*
+                ),*/
                 array(
                     'class'=>'CWebLogRoute',
+                    'levels'=>'error, warning',
                 ),
-                */
             ),
         ),
     ),

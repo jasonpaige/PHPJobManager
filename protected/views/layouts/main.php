@@ -7,42 +7,50 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-    <title><?php echo CHtml::encode(Yii::app()->name); ?></title>
+    <title><?= CHtml::encode(Yii::app()->name); ?></title>
     <meta name="description" content="">
     <meta name="author" content="">
 
     <meta name="viewport" content="width=device-width,initial-scale=1">
 
     <link rel="stylesheet" href="css/style.css">
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono|Ubuntu:400,700' rel='stylesheet' type='text/css'>
 
     <script src="js/libs/modernizr-2.0.6.min.js"></script>
 </head>
 <body>
 
 <div id="container">
-    <header>
-        <?php $this->widget('zii.widgets.CMenu',array(
-            'items'=>array(
-                array('label'=>'Home', 'url'=>array('/site/index')),
-                array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
-                array('label'=>'Contact', 'url'=>array('/site/contact')),
-                array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
-                array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
+    <header class="clearfix">
+        <h1 class="left"><?= CHtml::encode(Yii::app()->name); ?></h1>
+        <? $this->widget('zii.widgets.CMenu',array(
+            'htmlOptions' => array('id' => 'login-logout','class' => 'right login-logout'),
+            'items' => array(
+                array('label' => 'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
+                array('label' => 'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
             ),
         )); ?>
-        <?php if(isset($this->breadcrumbs)):?>
-            <?php $this->widget('zii.widgets.CBreadcrumbs', array(
-                'links'=>$this->breadcrumbs,
-            )); ?><!-- breadcrumbs -->
-        <?php endif?>
-
-        <?php echo $content; ?>
     </header>
+    
+    <? if (!Yii::app()->user->isGuest): ?>
+        <nav>
+            <? $this->widget('zii.widgets.CMenu',array(
+                'htmlOptions' => array('id' => 'login-logout','class' => 'right login-logout'),
+                'items' => array(
+                    array('label' => 'Dashboard', 'url' => array('/dashboard')),
+                    array('label' => '+ New Job', 'url' => array('/jobs/new')),
+                    array('label' => 'Manage Jobs', 'url' => array('/jobs/manage')),
+                    array('label' => 'Manage Users', 'url' => array('/users/manage'))
+                ),
+            )); ?>
+        </nav>
+    <? endif; ?>
+    
     <div id="main" role="main">
-
+        <?php echo $content; ?>
     </div>
     <footer>
-
+        
     </footer>
 </div> <!--! end of #container -->
 
