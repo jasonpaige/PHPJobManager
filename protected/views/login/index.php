@@ -5,45 +5,45 @@ $this->breadcrumbs=array(
 );
 ?>
 
-<h1>Login</h1>
+<div class="contentBlock">
 
-<p>Please fill out the following form with your login credentials:</p>
+    <h2>Login</h2>
 
-<div class="form">
-<?php $form=$this->beginWidget('CActiveForm', array(
-    'id'=>'login-form',
-    'enableClientValidation'=>true,
-    'clientOptions'=>array(
-        'validateOnSubmit'=>true,
-    ),
-)); ?>
+    <p>Please fill out the following form with your login credentials:</p>
 
-    <p class="note">Fields with <span class="required">*</span> are required.</p>
+    <div class="form">
+    <?php $form = $this->beginWidget('CActiveForm', array(
+        'id'=>'login-form',
+        'enableClientValidation'=>true,
+        'clientOptions'=>array(
+            'validateOnSubmit'=>true,
+        ),
+    )); ?>
 
-    <div class="row">
-        <?php echo $form->labelEx($model,'username'); ?>
-        <?php echo $form->textField($model,'username'); ?>
-        <?php echo $form->error($model,'username'); ?>
-    </div>
+        <p class="note">Fields with <span class="required">*</span> are required.</p>
 
-    <div class="row">
-        <?php echo $form->labelEx($model,'password'); ?>
-        <?php echo $form->passwordField($model,'password'); ?>
-        <?php echo $form->error($model,'password'); ?>
-        <p class="hint">
-            Hint: You may login with <tt>demo/demo</tt> or <tt>admin/admin</tt>.
-        </p>
-    </div>
+        <div class="row">
+            <?=$form->labelEx($model,'username'); ?>
+            <?=$form->textField($model,'username'); ?>
+            <?=$form->error($model,'username'); ?>
+        </div>
 
-    <div class="row rememberMe">
-        <?php echo $form->checkBox($model,'rememberMe'); ?>
-        <?php echo $form->label($model,'rememberMe'); ?>
-        <?php echo $form->error($model,'rememberMe'); ?>
-    </div>
+        <div class="row">
+            <?=$form->labelEx($model,'password'); ?>
+            <?=$form->passwordField($model,'password'); ?>
+            <?=$form->error($model,'password'); ?>
+        </div>
 
-    <div class="row buttons">
-        <?php echo CHtml::submitButton('Login'); ?>
-    </div>
+        <div class="row rememberMe">
+            <?=$form->checkBox($model,'rememberMe'); ?>
+            <?=$form->label($model,'rememberMe'); ?>
+            <?=$form->error($model,'rememberMe'); ?>
+        </div>
 
-<?php $this->endWidget(); ?>
-</div><!-- form -->
+        <div class="row buttons">
+            <?=CHtml::htmlButton('Login', array('type' => 'submit')); ?>
+        </div>
+
+    <?php $this->endWidget(); ?>
+    </div><!-- form -->
+</div>
