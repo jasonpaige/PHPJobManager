@@ -3,8 +3,8 @@ $this->breadcrumbs=array(
 	'Dashboard',
 );?>
 
-<div class="contentBlock">
-    <h1>Jobs</h1>
+<div class="contentBlock left">
+    <h2>Jobs</h2>
 
     <?php $this->widget('zii.widgets.CListView', array(
         'dataProvider' => $jobDataProvider,
@@ -12,11 +12,35 @@ $this->breadcrumbs=array(
     )); ?>
 </div>
 
-<div class="contentBlock">
-    <h1>Users</h1>
+<div class="contentBlock right">
+    <h2>Users</h2>
 
-    <?php $this->widget('zii.widgets.CListView', array(
-        'dataProvider' => $userDataProvider,
-        'itemView' => '_userview',
-    )); ?>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Level</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <td colspan="6" class="clearfix">
+                    <a href="/user/add" class="button green right">+ User</a>
+                </td>
+            </tr>
+        </tfoot>
+        <tbody>
+            <?php $this->widget('zii.widgets.CListView', array(
+                'dataProvider' => $userDataProvider,
+                'itemView' => '_userview',
+                'sortableAttributes'=>array(
+                    'id','username','email','level'
+                ),
+            )); ?>
+        </tbody>
+    </table>
 </div>

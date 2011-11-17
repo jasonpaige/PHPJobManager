@@ -13,10 +13,10 @@
 
     <meta name="viewport" content="width=device-width,initial-scale=1">
 
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
     <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono|Ubuntu:400,700' rel='stylesheet' type='text/css'>
 
-    <script src="js/libs/modernizr-2.0.6.min.js"></script>
+    <script src="/js/libs/modernizr-2.0.6.min.js"></script>
 </head>
 <body>
 
@@ -26,16 +26,16 @@
         <? $this->widget('zii.widgets.CMenu',array(
             'htmlOptions' => array('id' => 'login-logout','class' => 'right login-logout'),
             'items' => array(
-                array('label' => 'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
-                array('label' => 'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
+                array('label' => 'Login', 'url'=>array('/login'), 'visible'=>Yii::app()->user->isGuest),
+                array('label' => 'Logout ('.Yii::app()->user->name.')', 'url'=>array('/logout'), 'visible'=>!Yii::app()->user->isGuest)
             ),
         )); ?>
     </header>
     
     <? if (!Yii::app()->user->isGuest): ?>
-        <nav>
+        <nav class="clearfix">
             <? $this->widget('zii.widgets.CMenu',array(
-                'htmlOptions' => array('id' => 'login-logout','class' => 'right login-logout'),
+                'htmlOptions' => array('id' => 'login-logout','class' => 'login-logout'),
                 'items' => array(
                     array('label' => 'Dashboard', 'url' => array('/dashboard')),
                     array('label' => '+ New Job', 'url' => array('/jobs/new')),
@@ -46,7 +46,7 @@
         </nav>
     <? endif; ?>
     
-    <div id="main" role="main">
+    <div id="main" role="main" class="clearfix">
         <?php echo $content; ?>
     </div>
     <footer>
