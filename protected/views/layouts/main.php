@@ -39,8 +39,8 @@
                 'items' => array(
                     array('label' => 'Dashboard', 'url' => array('/dashboard')),
                     array('label' => '+ New Job', 'url' => array('/jobs/new')),
-                    array('label' => 'Manage Jobs', 'url' => array('/jobs/manage')),
-                    array('label' => 'Manage Users', 'url' => array('/users/manage'))
+                    array('label' => 'Manage Jobs', 'url' => array('/job/')),
+                    array('label' => 'Manage Users', 'url' => array('/user/'))
                 ),
             )); ?>
         </nav>

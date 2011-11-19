@@ -69,22 +69,21 @@ class UserController extends Controller
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id the ID of the model to be updated
      */
-    public function actionEdit($id)
-    {
-        $model=$this->loadModel($id);
-
-        // Uncomment the following line if AJAX validation is needed
-        // $this->performAjaxValidation($model);
-
-        if(isset($_POST['User']))
-        {
-            $model->attributes=$_POST['User'];
-            if($model->save())
+    public function actionEdit($id) {
+        $model = $this->loadModel($id);
+        if (isset($_POST['User'])) {
+            if (isset($_POST['User']['password'])) {
+                $phpAss = new PHPAssHash(8, false);
+                $_POST['User']['password'] = $phpAss->HashPassword($_POST['User']['password']);
+            }
+            $model->attributes = $_POST['User'];
+            if ($model->save()) {
                 $this->redirect(array('view','id'=>$model->id));
+            }
         }
-
+        $model->password = "";
         $this->render('edit',array(
-            'model'=>$model,
+            'model' => $model,
         ));
     }
 
