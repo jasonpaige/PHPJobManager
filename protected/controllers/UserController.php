@@ -119,6 +119,21 @@ class UserController extends Controller
     }
 
     /**
+     * Manages all models.
+     */
+    public function actionAdmin()
+    {
+        $model=new User('search');
+        $model->unsetAttributes();  // clear any default values
+        if(isset($_GET['User']))
+            $model->attributes=$_GET['User'];
+
+        $this->render('admin',array(
+            'model'=>$model,
+        ));
+    }
+
+    /**
      * Returns the data model based on the primary key given in the GET variable.
      * If the data model is not found, an HTTP exception will be raised.
      * @param integer the ID of the model to be loaded

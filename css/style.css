@@ -346,6 +346,25 @@ button.action:active,
     box-shadow: rgba(0, 0, 0, 0.296875) 0px 1px 2px 0px inset;
 }
 
+button.subaction,
+.button.subaction {    
+    color: #fff !important;
+    background-color: #4D90FE;
+    background-image: -webkit-linear-gradient(top,#4d90fe,#4787ed);
+    border: 1px solid #3079ED;
+}
+button.subaction:hover,
+.button.subaction:hover {    
+    background-color: #357ae8;
+    background-image: -webkit-linear-gradient(top,#4d90fe,#357ae8);
+    border: 1px solid #2f5bb7;
+}
+button.subaction:active,
+.button.subaction:active {
+    border: 1px solid transparent;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
 
 
 

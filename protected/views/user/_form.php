@@ -1,8 +1,11 @@
 <div class="form">
 
-<?php $form=$this->beginWidget('CActiveForm', array(
-    'id'=>'user-form',
-    'enableAjaxValidation'=>false,
+<?php $form = $this->beginWidget('CActiveForm', array(
+    'id'=>'create-user-form',
+    'enableClientValidation'=>true,
+    'clientOptions'=>array(
+        'validateOnSubmit'=>true,
+    ),
 )); ?>
 
     <p class="note">Fields with <span class="required">*</span> are required.</p>
@@ -10,31 +13,32 @@
     <?php echo $form->errorSummary($model); ?>
 
     <div class="row">
-        <?php echo $form->labelEx($model,'username'); ?>
-        <?php echo $form->textField($model,'username',array('size'=>20,'maxlength'=>20)); ?>
-        <?php echo $form->error($model,'username'); ?>
+        <?=$form->labelEx($model,'username'); ?>
+        <?=$form->textField($model,'username'); ?>
+        <?=$form->error($model,'username'); ?>
     </div>
 
     <div class="row">
-        <?php echo $form->labelEx($model,'password'); ?>
-        <?php echo $form->passwordField($model,'password',array('size'=>60,'maxlength'=>100)); ?>
-        <?php echo $form->error($model,'password'); ?>
+        <?=$form->labelEx($model,'password'); ?>
+        <?=$form->passwordField($model,'password'); ?>
+        <?=$form->error($model,'password'); ?>
     </div>
 
-    <div class="row">
-        <?php echo $form->labelEx($model,'email'); ?>
-        <?php echo $form->textField($model,'email',array('size'=>50,'maxlength'=>50)); ?>
-        <?php echo $form->error($model,'email'); ?>
+    <div class="row email">
+        <?=$form->labelEx($model,'email'); ?>
+        <?=$form->textField($model,'email'); ?>
+        <?=$form->error($model,'email'); ?>
     </div>
 
-    <div class="row">
-        <?php echo $form->labelEx($model,'level'); ?>
-        <?php echo $form->textField($model,'level',array('size'=>5,'maxlength'=>5)); ?>
-        <?php echo $form->error($model,'level'); ?>
+    <div class="row level">
+        <?=$form->labelEx($model,'level'); ?>
+        <?=$form->dropDownList($model,'level', array('admin'=>'admin','super'=>'super'), array('prompt'=>'Select access level'));?>
+        <?=$form->error($model,'level'); ?>
     </div>
 
-    <div class="row buttons">
-        <?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+    <div class="row buttons clearfix">
+        <a href="/user/" class="button left">&#8592; Back to Users</a>
+        <?=CHtml::htmlButton($model->isNewRecord ? 'Create' : 'Save', array('type' => 'submit', 'class' => 'action right')); ?>
     </div>
 
 <?php $this->endWidget(); ?>

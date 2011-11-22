@@ -13,56 +13,56 @@
 ;if(window.jQuery) (function($){
 /*# AVOID COLLISIONS #*/
  
-    // plugin initialization
-    $.fn.MultiFile = function(options){
-        if(this.length==0) return this; // quick fail
-        
-        // Handle API methods
-        if(typeof arguments[0]=='string'){
-            // Perform API methods on individual elements
-            if(this.length>1){
-                var args = arguments;
-                return this.each(function(){
-                    $.fn.MultiFile.apply($(this), args);
+	// plugin initialization
+	$.fn.MultiFile = function(options){
+		if(this.length==0) return this; // quick fail
+		
+		// Handle API methods
+		if(typeof arguments[0]=='string'){
+			// Perform API methods on individual elements
+			if(this.length>1){
+				var args = arguments;
+				return this.each(function(){
+					$.fn.MultiFile.apply($(this), args);
     });
-            };
-            // Invoke API method handler
-            $.fn.MultiFile[arguments[0]].apply(this, $.makeArray(arguments).slice(1) || []);
-            // Quick exit...
-            return this;
-        };
-        
-        // Initialize options for this call
-        var options = $.extend(
-            {}/* new object */,
-            $.fn.MultiFile.options/* default options */,
-            options || {} /* just-in-time options */
-        );
-        
-        // Empty Element Fix!!!
-        // this code will automatically intercept native form submissions
-        // and disable empty file elements
-        $('form')
-        .not('MultiFile-intercepted')
-        .addClass('MultiFile-intercepted')
-        .submit($.fn.MultiFile.disableEmpty);
-        
-        //### http://plugins.jquery.com/node/1363
-        // utility method to integrate this plugin with others...
-        if($.fn.MultiFile.options.autoIntercept){
-            $.fn.MultiFile.intercept( $.fn.MultiFile.options.autoIntercept /* array of methods to intercept */ );
-            $.fn.MultiFile.options.autoIntercept = null; /* only run this once */
-        };
-        
-        // loop through each matched element
-        this
-         .not('.MultiFile-applied')
-            .addClass('MultiFile-applied')
-        .each(function(){
-            //#####################################################################
-            // MAIN PLUGIN FUNCTIONALITY - START
-            //#####################################################################
-            
+			};
+			// Invoke API method handler
+			$.fn.MultiFile[arguments[0]].apply(this, $.makeArray(arguments).slice(1) || []);
+			// Quick exit...
+			return this;
+		};
+		
+		// Initialize options for this call
+		var options = $.extend(
+			{}/* new object */,
+			$.fn.MultiFile.options/* default options */,
+			options || {} /* just-in-time options */
+		);
+		
+		// Empty Element Fix!!!
+		// this code will automatically intercept native form submissions
+		// and disable empty file elements
+		$('form')
+		.not('MultiFile-intercepted')
+		.addClass('MultiFile-intercepted')
+		.submit($.fn.MultiFile.disableEmpty);
+		
+		//### http://plugins.jquery.com/node/1363
+		// utility method to integrate this plugin with others...
+		if($.fn.MultiFile.options.autoIntercept){
+			$.fn.MultiFile.intercept( $.fn.MultiFile.options.autoIntercept /* array of methods to intercept */ );
+			$.fn.MultiFile.options.autoIntercept = null; /* only run this once */
+		};
+		
+		// loop through each matched element
+		this
+		 .not('.MultiFile-applied')
+			.addClass('MultiFile-applied')
+		.each(function(){
+			//#####################################################################
+			// MAIN PLUGIN FUNCTIONALITY - START
+			//#####################################################################
+			
        // BUG 1251 FIX: http://plugins.jquery.com/project/comments/add/1251
        // variable group_count would repeat itself on multiple calls to the plugin.
        // this would cause a conflict with multiple elements
@@ -81,8 +81,8 @@
        var o = $.extend({},
         $.fn.MultiFile.options,
         options || {},
-                       ($.metadata? MultiFile.E.metadata(): ($.meta?MultiFile.E.data():null)) || {}, /* metadata options */
-                                {} /* internals */
+   					($.metadata? MultiFile.E.metadata(): ($.meta?MultiFile.E.data():null)) || {}, /* metadata options */
+								{} /* internals */
        );
        // limit number of files that can be selected?
        if(!(o.max>0) /*IsNull(MultiFile.max)*/){
@@ -104,7 +104,7 @@
        //===
        
        // APPLY CONFIGURATION
-                            $.extend(MultiFile, o || {});
+							$.extend(MultiFile, o || {});
        MultiFile.STRING = $.extend({},$.fn.MultiFile.options.STRING,MultiFile.STRING);
        
        //===
@@ -131,7 +131,7 @@
        // Setup dynamic regular expression for extension validation
        // - thanks to John-Paul Bader: http://smyck.de/2006/08/11/javascript-dynamic-regular-expresions/
        if(String(MultiFile.accept).length>1){
-                                MultiFile.accept = MultiFile.accept.replace(/\W+/g,'|').replace(/^\W|\W$/g,'');
+								MultiFile.accept = MultiFile.accept.replace(/\W+/g,'|').replace(/^\W|\W$/g,'');
         MultiFile.rxAccept = new RegExp('\\.('+(MultiFile.accept?MultiFile.accept:'')+')$','gi');
        };
        
@@ -149,34 +149,34 @@
        
        //===
        
-                            if(!MultiFile.list){
-                                // Create a wrapper for the list
-                                // * OPERA BUG: NO_MODIFICATION_ALLOWED_ERR ('list' is a read-only property)
-                                // this change allows us to keep the files in the order they were selected
-                                MultiFile.wrapper.append( '<div class="MultiFile-list" id="'+MultiFile.wrapID+'_list"></div>' );
-                                MultiFile.list = $('#'+MultiFile.wrapID+'_list');
-                            };
+							if(!MultiFile.list){
+								// Create a wrapper for the list
+								// * OPERA BUG: NO_MODIFICATION_ALLOWED_ERR ('list' is a read-only property)
+								// this change allows us to keep the files in the order they were selected
+								MultiFile.wrapper.append( '<div class="MultiFile-list" id="'+MultiFile.wrapID+'_list"></div>' );
+								MultiFile.list = $('#'+MultiFile.wrapID+'_list');
+							};
        MultiFile.list = $(MultiFile.list);
-                            
+							
        //===
        
        // Bind a new element
        MultiFile.addSlave = function( slave, slave_count ){
-                                //if(window.console) console.log('MultiFile.addSlave',slave_count);
-                                
+								//if(window.console) console.log('MultiFile.addSlave',slave_count);
+								
         // Keep track of how many elements have been displayed
         MultiFile.n++;
         // Add reference to master element
         slave.MultiFile = MultiFile;
-                                
-                                // BUG FIX: http://plugins.jquery.com/node/1495
-                                // Clear identifying properties from clones
-                                if(slave_count>0) slave.id = slave.name = '';
-                                
+								
+								// BUG FIX: http://plugins.jquery.com/node/1495
+								// Clear identifying properties from clones
+								if(slave_count>0) slave.id = slave.name = '';
+								
         // Define element's ID and name (upload components need this!)
         //slave.id = slave.id || MultiFile.generateID(slave_count);
-                                if(slave_count>0) slave.id = MultiFile.generateID(slave_count);
-                                //FIX for: http://code.google.com/p/jquery-multifile-plugin/issues/detail?id=23
+								if(slave_count>0) slave.id = MultiFile.generateID(slave_count);
+								//FIX for: http://code.google.com/p/jquery-multifile-plugin/issues/detail?id=23
         
         // 2008-Apr-29: New customizable naming convention (see url below)
         // http://groups.google.com/group/jquery-dev/browse_frm/thread/765c73e41b34f924#
@@ -195,19 +195,19 @@
         // Remember most recent slave
         MultiFile.current = MultiFile.slaves[slave_count] = slave;
         
-                                // We'll use jQuery from now on
-                                slave = $(slave);
+								// We'll use jQuery from now on
+								slave = $(slave);
         
         // Clear value
         slave.val('').attr('value','')[0].value = '';
         
-                                // Stop plugin initializing on slaves
-                                slave.addClass('MultiFile-applied');
-                                
+								// Stop plugin initializing on slaves
+								slave.addClass('MultiFile-applied');
+								
         // Triggered when a file is selected
         slave.change(function(){
           //if(window.console) console.log('MultiFile.slave.change',slave_count);
-                                  
+ 								 
           // Lose focus to stop IE7 firing onchange again
           $(this).blur();
           
@@ -225,9 +225,9 @@
           //};
           
           // Disallow duplicates
-                                        for(var f in MultiFile.slaves)//{
+										for(var f in MultiFile.slaves)//{
            if(MultiFile.slaves[f] && MultiFile.slaves[f]!=this)//{
-                                          //console.log(MultiFile.slaves[f],MultiFile.slaves[f].value);
+  										//console.log(MultiFile.slaves[f],MultiFile.slaves[f].value);
             if(MultiFile.slaves[f].value==v)//{
              ERROR = MultiFile.STRING.duplicate.replace('$file', v.match(/[^\/\\]+$/gi));
             //};
@@ -245,8 +245,8 @@
           if(ERROR!=''){
             // Handle error
             MultiFile.error(ERROR);
-                                                
-            // 2007-06-24: BUG FIX - Thanks to Adrian Wrï¿½bel <adrian [dot] wrobel [at] gmail.com>
+												
+            // 2007-06-24: BUG FIX - Thanks to Adrian Wróbel <adrian [dot] wrobel [at] gmail.com>
             // Ditch the trouble maker and add a fresh new element
             MultiFile.n--;
             MultiFile.addSlave(newEle[0], slave_count);
@@ -272,10 +272,10 @@
           //# End Event!
           
         }); // slave.change()
-                                
-                                // Save control to element
-                                $(slave).data('MultiFile', MultiFile);
-                                
+								
+								// Save control to element
+								$(slave).data('MultiFile', MultiFile);
+								
        };// MultiFile.addSlave
        // Bind a new element
        
@@ -284,7 +284,7 @@
        // Add a new file to the list
        MultiFile.addToList = function( slave, slave_count ){
         //if(window.console) console.log('MultiFile.addToList',slave_count);
-                                
+								
         //# Trigger Event! onFileAppend
         if(!MultiFile.trigger('onFileAppend', slave, MultiFile)) return false;
         //# End Event!
@@ -302,7 +302,7 @@
         );
         
         b
-                                .click(function(){
+								.click(function(){
          
           //# Trigger Event! onFileRemove
           if(!MultiFile.trigger('onFileRemove', slave, MultiFile)) return false;
@@ -312,18 +312,18 @@
           MultiFile.current.disabled = false;
           
           // Remove element, remove label, point to current
-                                        MultiFile.slaves[slave_count] = null;
-                                        $(slave).remove();
-                                        $(this).parent().remove();
-                                        
+										MultiFile.slaves[slave_count] = null;
+										$(slave).remove();
+										$(this).parent().remove();
+										
           // Show most current element again (move into view) and clear selection
           $(MultiFile.current).css({ position:'', top: '' });
-                                        $(MultiFile.current).reset().val('').attr('value', '')[0].value = '';
+										$(MultiFile.current).reset().val('').attr('value', '')[0].value = '';
           
           //# Trigger Event! afterFileRemove
           if(!MultiFile.trigger('afterFileRemove', slave, MultiFile)) return false;
           //# End Event!
-                                        
+										
           return false;
         });
         
@@ -342,23 +342,23 @@
        // Increment control count
        //MultiFile.I++; // using window.MultiFile
        MultiFile.n++;
-                            
-                            // Save control to element
-                            MultiFile.E.data('MultiFile', MultiFile);
-                            
+							
+							// Save control to element
+							MultiFile.E.data('MultiFile', MultiFile);
+							
 
-            //#####################################################################
-            // MAIN PLUGIN FUNCTIONALITY - END
-            //#####################################################################
-        }); // each element
-    };
-    
-    /*--------------------------------------------------------*/
-    
-    /*
-        ### Core functionality and API ###
-    */
-    $.extend($.fn.MultiFile, {
+			//#####################################################################
+			// MAIN PLUGIN FUNCTIONALITY - END
+			//#####################################################################
+		}); // each element
+	};
+	
+	/*--------------------------------------------------------*/
+	
+	/*
+		### Core functionality and API ###
+	*/
+	$.extend($.fn.MultiFile, {
   /**
    * This method removes all selected files
    *
@@ -372,9 +372,9 @@
    * @example $.fn.MultiFile.reset();
    */
   reset: function(){
-            var settings = $(this).data('MultiFile');
-            //if(settings) settings.wrapper.find('a.MultiFile-remove').click();
-            if(settings) settings.list.find('a.MultiFile-remove').click();
+			var settings = $(this).data('MultiFile');
+			//if(settings) settings.wrapper.find('a.MultiFile-remove').click();
+			if(settings) settings.list.find('a.MultiFile-remove').click();
    return $(this);
   },
   
@@ -400,35 +400,35 @@
   },
   
   
-        /**
-            * This method re-enables 'empty' file elements that were disabled (and marked) with the $.fn.MultiFile.disableEmpty method.
-            *
-            * Returns a jQuery collection of all affected elements.
-            *
-            * @name reEnableEmpty
-            * @type jQuery
-            * @cat Plugins/MultiFile
-            * @author Diego A. (http://www.fyneworks.com/)
-            *
-            * @example $.fn.MultiFile.reEnableEmpty();
-            * @param String klass (optional) A string specifying the class that was used to mark affected elements - Default: 'mfD'.
-            */
+		/**
+			* This method re-enables 'empty' file elements that were disabled (and marked) with the $.fn.MultiFile.disableEmpty method.
+			*
+			* Returns a jQuery collection of all affected elements.
+			*
+			* @name reEnableEmpty
+			* @type jQuery
+			* @cat Plugins/MultiFile
+			* @author Diego A. (http://www.fyneworks.com/)
+			*
+			* @example $.fn.MultiFile.reEnableEmpty();
+			* @param String klass (optional) A string specifying the class that was used to mark affected elements - Default: 'mfD'.
+			*/
   reEnableEmpty: function(klass){ klass = (typeof(klass)=='string'?klass:'')||'mfD';
    return $('input:file.'+klass).removeClass(klass).each(function(){ this.disabled = false });
   },
   
   
-        /**
-            * This method will intercept other jQuery plugins and disable empty file input elements prior to form submission
-            *
-    
-            * @name intercept
-            * @cat Plugins/MultiFile
-            * @author Diego A. (http://www.fyneworks.com/)
-            *
-            * @example $.fn.MultiFile.intercept();
-            * @param Array methods (optional) Array of method names to be intercepted
-            */
+		/**
+			* This method will intercept other jQuery plugins and disable empty file input elements prior to form submission
+			*
+	
+			* @name intercept
+			* @cat Plugins/MultiFile
+			* @author Diego A. (http://www.fyneworks.com/)
+			*
+			* @example $.fn.MultiFile.intercept();
+			* @param Array methods (optional) Array of method names to be intercepted
+			*/
   intercepted: {},
   intercept: function(methods, context, args){
    var method, value; args = args || [];
@@ -436,8 +436,8 @@
    if(typeof(methods)=='function'){
     $.fn.MultiFile.disableEmpty();
     value = methods.apply(context || window, args);
-                //SEE-http://code.google.com/p/jquery-multifile-plugin/issues/detail?id=27
-                setTimeout(function(){ $.fn.MultiFile.reEnableEmpty() },1000);
+				//SEE-http://code.google.com/p/jquery-multifile-plugin/issues/detail?id=27
+				setTimeout(function(){ $.fn.MultiFile.reEnableEmpty() },1000);
     return value;
    };
    if(methods.constructor.toString().indexOf("Array")<0) methods = [methods];
@@ -448,89 +448,89 @@
      $.fn[method] = function(){
       $.fn.MultiFile.disableEmpty();
       value = $.fn.MultiFile.intercepted[method].apply(this, arguments);
-                        //SEE-http://code.google.com/p/jquery-multifile-plugin/issues/detail?id=27
+						//SEE-http://code.google.com/p/jquery-multifile-plugin/issues/detail?id=27
       setTimeout(function(){ $.fn.MultiFile.reEnableEmpty() },1000);
       return value;
      }; // interception
     })(method); // MAKE SURE THAT method IS ISOLATED for the interception
    };// for each method
   } // $.fn.MultiFile.intercept
-        
+		
  });
-    
-    /*--------------------------------------------------------*/
-    
-    /*
-        ### Default Settings ###
-        eg.: You can override default control like this:
-        $.fn.MultiFile.options.accept = 'gif|jpg';
-    */
-    $.fn.MultiFile.options = { //$.extend($.fn.MultiFile, { options: {
-        accept: '', // accepted file extensions
-        max: -1,    // maximum number of selectable files
-        
-        // name to use for newly created elements
-        namePattern: '$name', // same name by default (which creates an array)
-        
-        // STRING: collection lets you show messages in different languages
-        STRING: {
-            remove:'x',
-            denied:'You cannot select a $ext file.\nTry again...',
-            file:'$file',
-            selected:'File selected: $file',
-            duplicate:'This file has already been selected:\n$file'
-        },
-        
-        // name of methods that should be automcatically intercepted so the plugin can disable
-        // extra file elements that are empty before execution and automatically re-enable them afterwards
+	
+	/*--------------------------------------------------------*/
+	
+	/*
+		### Default Settings ###
+		eg.: You can override default control like this:
+		$.fn.MultiFile.options.accept = 'gif|jpg';
+	*/
+	$.fn.MultiFile.options = { //$.extend($.fn.MultiFile, { options: {
+		accept: '', // accepted file extensions
+		max: -1,    // maximum number of selectable files
+		
+		// name to use for newly created elements
+		namePattern: '$name', // same name by default (which creates an array)
+		
+		// STRING: collection lets you show messages in different languages
+		STRING: {
+			remove:'x',
+			denied:'You cannot select a $ext file.\nTry again...',
+			file:'$file',
+			selected:'File selected: $file',
+			duplicate:'This file has already been selected:\n$file'
+		},
+		
+		// name of methods that should be automcatically intercepted so the plugin can disable
+		// extra file elements that are empty before execution and automatically re-enable them afterwards
   autoIntercept: [ 'submit', 'ajaxSubmit', 'ajaxForm', 'validate', 'valid' /* array of methods to intercept */ ],
-        
-        // error handling function
-        error: function(s){
-            /*
-            ERROR! blockUI is not currently working in IE
-            if($.blockUI){
-                $.blockUI({
-                    message: s.replace(/\n/gi,'<br/>'),
-                    css: { 
-                        border:'none', padding:'15px', size:'12.0pt',
-                        backgroundColor:'#900', color:'#fff',
-                        opacity:'.8','-webkit-border-radius': '10px','-moz-border-radius': '10px'
-                    }
-                });
-                window.setTimeout($.unblockUI, 2000);
-            }
-            else//{// save a byte!
-            */
-             alert(s);
-            //}// save a byte!
-        }
+		
+		// error handling function
+		error: function(s){
+			/*
+			ERROR! blockUI is not currently working in IE
+			if($.blockUI){
+				$.blockUI({
+					message: s.replace(/\n/gi,'<br/>'),
+					css: { 
+						border:'none', padding:'15px', size:'12.0pt',
+						backgroundColor:'#900', color:'#fff',
+						opacity:'.8','-webkit-border-radius': '10px','-moz-border-radius': '10px'
+					}
+				});
+				window.setTimeout($.unblockUI, 2000);
+			}
+			else//{// save a byte!
+			*/
+			 alert(s);
+			//}// save a byte!
+		}
  }; //} });
-    
-    /*--------------------------------------------------------*/
-    
-    /*
-        ### Additional Methods ###
-        Required functionality outside the plugin's scope
-    */
-    
-    // Native input reset method - because this alone doesn't always work: $(element).val('').attr('value', '')[0].value = '';
-    $.fn.reset = function(){ return this.each(function(){ try{ this.reset(); }catch(e){} }); };
-    
-    /*--------------------------------------------------------*/
-    
-    /*
-        ### Default implementation ###
-        The plugin will attach itself to file inputs
-        with the class 'multi' when the page loads
-    */
-    $(function(){
+	
+	/*--------------------------------------------------------*/
+	
+	/*
+		### Additional Methods ###
+		Required functionality outside the plugin's scope
+	*/
+	
+	// Native input reset method - because this alone doesn't always work: $(element).val('').attr('value', '')[0].value = '';
+	$.fn.reset = function(){ return this.each(function(){ try{ this.reset(); }catch(e){} }); };
+	
+	/*--------------------------------------------------------*/
+	
+	/*
+		### Default implementation ###
+		The plugin will attach itself to file inputs
+		with the class 'multi' when the page loads
+	*/
+	$(function(){
   //$("input:file.multi").MultiFile();
   $("input[type=file].multi").MultiFile();
  });
-    
-    
-    
+	
+	
+	
 /*# AVOID COLLISIONS #*/
 })(jQuery);
 /*# AVOID COLLISIONS #*/

@@ -25,7 +25,7 @@ $this->menu=array(
         <tfoot>
             <tr>
                 <td colspan="6" class="clearfix">
-                    <a href="/user/create" class="button green right">+ User</a>
+                    <a href="/user/create" class="button action right">+ User</a>
                 </td>
             </tr>
         </tfoot>
