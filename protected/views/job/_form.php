@@ -1,52 +1,50 @@
 <div class="form">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
-    'id'=>'job-form',
-    'enableAjaxValidation'=>false,
+    'id'=>'create-job-form',
+    'enableClientValidation'=>true,
+    'clientOptions'=>array(
+        'validateOnSubmit'=>true,
+    ),
 )); ?>
 
     <p class="note">Fields with <span class="required">*</span> are required.</p>
 
-    <?php echo $form->errorSummary($model); ?>
+    <?= $form->errorSummary($model); ?>
 
     <div class="row">
-        <?php echo $form->labelEx($model,'user_id'); ?>
-        <?php echo $form->textField($model,'user_id'); ?>
-        <?php echo $form->error($model,'user_id'); ?>
+        <?= $form->labelEx($model,'user_id'); ?>
+        <?= $form->dropDownList($model,'user_id', CHtml::listData(User::model()->findAll(), 'id', 'username'), array('prompt'=>'Select a user'));?>
+        <?= $form->error($model,'user_id'); ?>
     </div>
 
     <div class="row">
-        <?php echo $form->labelEx($model,'name'); ?>
-        <?php echo $form->textField($model,'name',array('size'=>60,'maxlength'=>100)); ?>
-        <?php echo $form->error($model,'name'); ?>
+        <?= $form->labelEx($model,'name'); ?>
+        <?= $form->textField($model,'name',array('size'=>60,'maxlength'=>100)); ?>
+        <?= $form->error($model,'name'); ?>
     </div>
 
     <div class="row">
-        <?php echo $form->labelEx($model,'command'); ?>
-        <?php echo $form->textArea($model,'command',array('rows'=>6, 'cols'=>50)); ?>
-        <?php echo $form->error($model,'command'); ?>
+        <?= $form->labelEx($model,'command'); ?>
+        <?= $form->textArea($model,'command',array('rows'=>6, 'cols'=>50)); ?>
+        <?= $form->error($model,'command'); ?>
     </div>
 
     <div class="row">
-        <?php echo $form->labelEx($model,'cron'); ?>
-        <?php echo $form->textField($model,'cron',array('size'=>60,'maxlength'=>100)); ?>
-        <?php echo $form->error($model,'cron'); ?>
+        <?= $form->labelEx($model,'cron'); ?>
+        <?= $form->textField($model,'cron',array('size'=>60,'maxlength'=>100)); ?>
+        <?= $form->error($model,'cron'); ?>
     </div>
 
     <div class="row">
-        <?php echo $form->labelEx($model,'created'); ?>
-        <?php echo $form->textField($model,'created'); ?>
-        <?php echo $form->error($model,'created'); ?>
+        <?= $form->labelEx($model,'termination_date'); ?>
+        <?= $form->textField($model,'termination_date'); ?>
+        <?= $form->error($model,'termination_date'); ?>
     </div>
 
-    <div class="row">
-        <?php echo $form->labelEx($model,'termination_date'); ?>
-        <?php echo $form->textField($model,'termination_date'); ?>
-        <?php echo $form->error($model,'termination_date'); ?>
-    </div>
-
-    <div class="row buttons">
-        <?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+    <div class="row buttons clearfix">
+        <a href="/job/" class="button left">&#8592; Back to Jobs</a>
+        <?=CHtml::htmlButton($model->isNewRecord ? 'Create' : 'Save', array('type' => 'submit', 'class' => 'action right')); ?>
     </div>
 
 <?php $this->endWidget(); ?>

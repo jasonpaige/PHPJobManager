@@ -1,32 +1,31 @@
-<div class="view">
+<?php
+    $user = User::model()->findByPk($data->user_id);
+?>
+<tr class="view">
 
-    <b><?php echo CHtml::encode($data->getAttributeLabel('id')); ?>:</b>
-    <?php echo CHtml::link(CHtml::encode($data->id), array('view', 'id'=>$data->id)); ?>
-    <br />
+    <td>
+        <?= CHtml::encode($data->id); ?>
+    </td>
+    <td>
+        <?= CHtml::encode($user->username); ?>
+    </td>
+    <td>
+        <?= CHtml::encode($data->name); ?>
+    </td>
+    <td>
+        <?= CHtml::encode($data->cron); ?>
+    </td>
+    <td>
+        <?= CHtml::encode($data->created); ?>
+    </td>
+    <td>
+        <?= CHtml::encode($data->termination_date); ?>
+    </td>
+    <td>
+        <?= CHtml::link('Edit', array('/job/edit', 'id'=>$data->id)); ?>
+    </td>
+    <td>
+        <?= CHtml::link('Delete', array('/job/delete', 'id'=>$data->id), array('onclick' => 'return confirm("Are you sure you want to delete this job?");')); ?>
+    </td>
 
-    <b><?php echo CHtml::encode($data->getAttributeLabel('user_id')); ?>:</b>
-    <?php echo CHtml::encode($data->user_id); ?>
-    <br />
-
-    <b><?php echo CHtml::encode($data->getAttributeLabel('name')); ?>:</b>
-    <?php echo CHtml::encode($data->name); ?>
-    <br />
-
-    <b><?php echo CHtml::encode($data->getAttributeLabel('command')); ?>:</b>
-    <?php echo CHtml::encode($data->command); ?>
-    <br />
-
-    <b><?php echo CHtml::encode($data->getAttributeLabel('cron')); ?>:</b>
-    <?php echo CHtml::encode($data->cron); ?>
-    <br />
-
-    <b><?php echo CHtml::encode($data->getAttributeLabel('created')); ?>:</b>
-    <?php echo CHtml::encode($data->created); ?>
-    <br />
-
-    <b><?php echo CHtml::encode($data->getAttributeLabel('termination_date')); ?>:</b>
-    <?php echo CHtml::encode($data->termination_date); ?>
-    <br />
-
-
-</div>
+</tr>

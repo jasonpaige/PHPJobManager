@@ -2,11 +2,6 @@
 
 class JobController extends Controller
 {
-    /**
-     * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
-     * using two-column layout. See 'protected/views/layouts/column2.php'.
-     */
-    public $layout='//layouts/column2';
 
     /**
      * @return array action filters
@@ -26,20 +21,11 @@ class JobController extends Controller
     public function accessRules()
     {
         return array(
-            array('allow',  // allow all users to perform 'index' and 'view' actions
-                'actions'=>array('index','view'),
-                'users'=>array('*'),
+            array('deny',
+                'users'=>array('?'),
             ),
-            array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions'=>array('create','update'),
+            array('allow',
                 'users'=>array('@'),
-            ),
-            array('allow', // allow admin user to perform 'admin' and 'delete' actions
-                'actions'=>array('admin','delete'),
-                'users'=>array('admin'),
-            ),
-            array('deny',  // deny all users
-                'users'=>array('*'),
             ),
         );
     }
@@ -61,20 +47,22 @@ class JobController extends Controller
      */
     public function actionCreate()
     {
-        $model=new Job;
-
-        // Uncomment the following line if AJAX validation is needed
-        // $this->performAjaxValidation($model);
-
-        if(isset($_POST['Job']))
-        {
-            $model->attributes=$_POST['Job'];
-            if($model->save())
+        $model = new Job;
+        
+        if (isset($_POST['Job'])) {
+            if (trim($_POST['Job']['termination_date']) == "") {
+                $_POST['Job']['termination_date'] = null;
+            }
+            $model->attributes = $_POST['Job'];
+            $model->created = date("Y-m-d H:i:s");
+            if ($model->save()) {
                 $this->redirect(array('view','id'=>$model->id));
+            }
         }
-
+        // default the user to the currently logged in one
+        $model->user_id = Yii::app()->user->getId(); 
         $this->render('create',array(
-            'model'=>$model,
+            'model' => $model
         ));
     }
 
@@ -104,22 +92,12 @@ class JobController extends Controller
 
     /**
      * Deletes a particular model.
-     * If deletion is successful, the browser will be redirected to the 'admin' page.
      * @param integer $id the ID of the model to be deleted
      */
     public function actionDelete($id)
     {
-        if(Yii::app()->request->isPostRequest)
-        {
-            // we only allow deletion via POST request
-            $this->loadModel($id)->delete();
-
-            // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-            if(!isset($_GET['ajax']))
-                $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
-        }
-        else
-            throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+        $this->loadModel($id)->delete();
+        $this->redirect(array('/job/'));
     }
 
     /**
@@ -127,23 +105,12 @@ class JobController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider=new CActiveDataProvider('Job');
-        $this->render('index',array(
-            'dataProvider'=>$dataProvider,
-        ));
-    }
-
-    /**
-     * Manages all models.
-     */
-    public function actionAdmin()
-    {
         $model=new Job('search');
         $model->unsetAttributes();  // clear any default values
         if(isset($_GET['Job']))
             $model->attributes=$_GET['Job'];
 
-        $this->render('admin',array(
+        $this->render('index',array(
             'model'=>$model,
         ));
     }

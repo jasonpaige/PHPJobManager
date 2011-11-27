@@ -89,22 +89,14 @@ class UserController extends Controller
 
     /**
      * Deletes a particular model.
-     * If deletion is successful, the browser will be redirected to the 'admin' page.
      * @param integer $id the ID of the model to be deleted
      */
     public function actionDelete($id)
     {
-        if(Yii::app()->request->isPostRequest)
-        {
-            // we only allow deletion via POST request
-            $this->loadModel($id)->delete();
+        // we only allow deletion via POST request
+        $this->loadModel($id)->delete();
 
-            // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-            if(!isset($_GET['ajax']))
-                $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
-        }
-        else
-            throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+        $this->redirect(array('/user/'));
     }
 
     /**
@@ -112,23 +104,12 @@ class UserController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider=new CActiveDataProvider('User');
-        $this->render('index',array(
-            'dataProvider'=>$dataProvider,
-        ));
-    }
-
-    /**
-     * Manages all models.
-     */
-    public function actionAdmin()
-    {
         $model=new User('search');
         $model->unsetAttributes();  // clear any default values
         if(isset($_GET['User']))
             $model->attributes=$_GET['User'];
 
-        $this->render('admin',array(
+        $this->render('index',array(
             'model'=>$model,
         ));
     }

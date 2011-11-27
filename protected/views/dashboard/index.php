@@ -6,10 +6,36 @@ $this->breadcrumbs=array(
 <div class="contentBlock left">
     <h2>Jobs</h2>
 
-    <?php $this->widget('zii.widgets.CListView', array(
-        'dataProvider' => $jobDataProvider,
-        'itemView' => '_jobview',
-    )); ?>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>User</th>
+                <th>Name</th>
+                <th>Cron</th>
+                <th>Created</th>
+                <th>End Date</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <td colspan="6" class="clearfix">
+                    <a href="/job/create" class="button action right">+ Job</a>
+                </td>
+            </tr>
+        </tfoot>
+        <tbody>
+            <?php $this->widget('zii.widgets.CListView', array(
+                'dataProvider' => $jobDataProvider,
+                'itemView' => '/job/_view',
+                'sortableAttributes'=>array(
+                    'id','name','created','termination_date'
+                ),
+            )); ?>
+        </tbody>
+    </table>
 </div>
 
 <div class="contentBlock right">
@@ -36,7 +62,7 @@ $this->breadcrumbs=array(
         <tbody>
             <?php $this->widget('zii.widgets.CListView', array(
                 'dataProvider' => $userDataProvider,
-                'itemView' => '_userview',
+                'itemView' => '/user/_view',
                 'sortableAttributes'=>array(
                     'id','username','email','level'
                 ),
