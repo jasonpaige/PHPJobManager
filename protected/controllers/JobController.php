@@ -53,6 +53,11 @@ class JobController extends Controller
             if (trim($_POST['Job']['termination_date']) == "") {
                 $_POST['Job']['termination_date'] = null;
             }
+            $_POST['Job']['cron'] = $_POST['Job']['cron']['min'] . " " .
+                                    $_POST['Job']['cron']['hr'] . " " .
+                                    $_POST['Job']['cron']['day'] . " " .
+                                    $_POST['Job']['cron']['month'] . " " .
+                                    $_POST['Job']['cron']['year'] . " ";
             $model->attributes = $_POST['Job'];
             $model->created = date("Y-m-d H:i:s");
             if ($model->save()) {

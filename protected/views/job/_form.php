@@ -32,13 +32,25 @@
 
     <div class="row">
         <?= $form->labelEx($model,'cron'); ?>
-        <?= $form->textField($model,'cron',array('size'=>60,'maxlength'=>100)); ?>
+        <?= $form->textField($model,'cron[min]',array('size'=>2,'maxlength'=>100,'placeholder'=>'min')); ?>
+        <?= $form->textField($model,'cron[hr]',array('size'=>2,'maxlength'=>100,'placeholder'=>'hr')); ?>
+        <?= $form->textField($model,'cron[day]',array('size'=>2,'maxlength'=>100,'placeholder'=>'day')); ?>
+        <?= $form->textField($model,'cron[month]',array('size'=>2,'maxlength'=>100,'placeholder'=>'month')); ?>
+        <?= $form->textField($model,'cron[yr]',array('size'=>2,'maxlength'=>100,'placeholder'=>'yr')); ?>
         <?= $form->error($model,'cron'); ?>
     </div>
 
     <div class="row">
-        <?= $form->labelEx($model,'termination_date'); ?>
-        <?= $form->textField($model,'termination_date'); ?>
+        <?= $form->labelEx($model,'termination_date'); ?>    
+        <?php $this->widget('zii.widgets.jui.CJuiDatePicker', array(
+                'name'=>'Job[termination_date]',
+                'model'=>$model,
+                'options'=>array(
+                    'showAnim'=>'fold',
+                    'dateFormat'=>'yy-mm-dd 00:00:00',
+                ),
+            ));
+        ?>
         <?= $form->error($model,'termination_date'); ?>
     </div>
 

@@ -277,19 +277,31 @@ nav ul li {
 .form .row {
     margin: 0 auto 5px;
     width: 80%;
-    text-align: center;
+    clear: both;
 }
-.form input {
+.form label {
+    text-align: right;
+    width: 20%;
+    display: block;
+    float: left;
+    padding: 3px 5px 0 0;
+    font-weight: bold;
+}
+.form input,
+.form textarea {
     border: 1px solid #dfdfdf;
     font-family: 'Ubuntu', sans-serif;
     outline: none;
     border-radius: 2px;
 }
-.form input:hover {
+.form input:hover,
+.form textarea:hover {
     border: 1px solid #c0c0c0;
 }
 .form input:active,
-.form input:focus {
+.form input:focus,
+.form textarea:active,
+.form textarea:focus {
     border: 1px solid #3F72D8;
     -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.2);
 }
