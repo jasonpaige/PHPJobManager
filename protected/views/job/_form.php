@@ -32,7 +32,7 @@
 
     <div class="row">
         <?= $form->labelEx($model,'cron'); ?>
-        <?= $form->textField($model,'cron[min]',array('size'=>2,'maxlength'=>100,'placeholder'=>'min')); ?>
+        <?= $form->textField($model,'cron[min]',array('size'=>2,'maxlength'=>100,'placeholder'=>'min','alt'=>'cronMin')); ?>
         <?= $form->textField($model,'cron[hr]',array('size'=>2,'maxlength'=>100,'placeholder'=>'hr')); ?>
         <?= $form->textField($model,'cron[day]',array('size'=>2,'maxlength'=>100,'placeholder'=>'day')); ?>
         <?= $form->textField($model,'cron[month]',array('size'=>2,'maxlength'=>100,'placeholder'=>'month')); ?>
@@ -45,6 +45,7 @@
         <?php $this->widget('zii.widgets.jui.CJuiDatePicker', array(
                 'name'=>'Job[termination_date]',
                 'model'=>$model,
+                'value'=>$model->termination_date,
                 'options'=>array(
                     'showAnim'=>'fold',
                     'dateFormat'=>'yy-mm-dd 00:00:00',

@@ -57,7 +57,7 @@ class JobController extends Controller
                                     $_POST['Job']['cron']['hr'] . " " .
                                     $_POST['Job']['cron']['day'] . " " .
                                     $_POST['Job']['cron']['month'] . " " .
-                                    $_POST['Job']['cron']['year'] . " ";
+                                    $_POST['Job']['cron']['yr'] . " ";
             $model->attributes = $_POST['Job'];
             $model->created = date("Y-m-d H:i:s");
             if ($model->save()) {
@@ -76,7 +76,7 @@ class JobController extends Controller
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id the ID of the model to be updated
      */
-    public function actionUpdate($id)
+    public function actionEdit($id)
     {
         $model=$this->loadModel($id);
 
@@ -85,12 +85,30 @@ class JobController extends Controller
 
         if(isset($_POST['Job']))
         {
-            $model->attributes=$_POST['Job'];
-            if($model->save())
+            if (trim($_POST['Job']['termination_date']) == "") {
+                $_POST['Job']['termination_date'] = null;
+            }
+            $_POST['Job']['cron'] = $_POST['Job']['cron']['min'] . " " .
+                                    $_POST['Job']['cron']['hr'] . " " .
+                                    $_POST['Job']['cron']['day'] . " " .
+                                    $_POST['Job']['cron']['month'] . " " .
+                                    $_POST['Job']['cron']['yr'] . " ";
+            $model->attributes = $_POST['Job'];
+            if($model->save()) {
                 $this->redirect(array('view','id'=>$model->id));
+            }
         }
 
-        $this->render('update',array(
+        $cron_parts = explode(" ", $model->cron);
+        $model->setAttribute("cron", array(
+            'min'   => $cron_parts[0],
+            'hr'    => $cron_parts[1],
+            'day'   => $cron_parts[2],
+            'month' => $cron_parts[3],
+            'year'  => $cron_parts[4],
+        ));
+
+        $this->render('edit',array(
             'model'=>$model,
         ));
     }

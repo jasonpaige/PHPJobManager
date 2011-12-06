@@ -16,7 +16,8 @@
     <link rel="stylesheet" href="/css/style.css">
     <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono|Ubuntu:400,700' rel='stylesheet' type='text/css'>
 
-    <script src="/js/libs/modernizr-2.0.6.min.js"></script>
+    <script src="/assets/js/libs/jquery-1.6.2.min.js"></script>
+    <script src="/assets/js/libs/modernizr-2.0.6.min.js"></script>
 </head>
 <body>
 
@@ -54,8 +55,6 @@
     </footer>
 </div> <!--! end of #container -->
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="/assets/js/libs/jquery-1.6.2.min.js"><\/script>')</script>
 <script>
     var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']]; // Change UA-XXXXX-X to be your site's ID
     (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
