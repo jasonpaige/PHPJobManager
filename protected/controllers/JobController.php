@@ -1,4 +1,5 @@
 <?php
+require_once "protected/extensions/cron/cron.phar";
 
 class JobController extends Controller
 {
@@ -57,7 +58,7 @@ class JobController extends Controller
                                     $_POST['Job']['cron']['hr'] . " " .
                                     $_POST['Job']['cron']['day'] . " " .
                                     $_POST['Job']['cron']['month'] . " " .
-                                    $_POST['Job']['cron']['yr'] . " ";
+                                    $_POST['Job']['cron']['yr'];
             $model->attributes = $_POST['Job'];
             $model->created = date("Y-m-d H:i:s");
             if ($model->save()) {
@@ -92,7 +93,7 @@ class JobController extends Controller
                                     $_POST['Job']['cron']['hr'] . " " .
                                     $_POST['Job']['cron']['day'] . " " .
                                     $_POST['Job']['cron']['month'] . " " .
-                                    $_POST['Job']['cron']['yr'] . " ";
+                                    $_POST['Job']['cron']['yr'];
             $model->attributes = $_POST['Job'];
             if($model->save()) {
                 $this->redirect(array('view','id'=>$model->id));
@@ -105,7 +106,7 @@ class JobController extends Controller
             'hr'    => $cron_parts[1],
             'day'   => $cron_parts[2],
             'month' => $cron_parts[3],
-            'year'  => $cron_parts[4],
+            'yr'  => $cron_parts[4],
         ));
 
         $this->render('edit',array(

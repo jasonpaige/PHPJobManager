@@ -15,6 +15,7 @@ $this->breadcrumbs=array(
                 <th>Cron</th>
                 <th>Created</th>
                 <th>End Date</th>
+                <th>Next Run Date</th>
                 <th></th>
                 <th></th>
             </tr>

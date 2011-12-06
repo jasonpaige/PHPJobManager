@@ -27,6 +27,7 @@ $this->breadcrumbs=array(
                 <th>Cron</th>
                 <th>Created</th>
                 <th>End Date</th>
+                <th>Next Run Date</th>
                 <th></th>
                 <th></th>
             </tr>
@@ -37,12 +38,13 @@ $this->breadcrumbs=array(
                 <th><?= $form->textField($model,'cron', array("size"=>"10")); ?></th>
                 <th><?= $form->textField($model,'created', array("size"=>"10")); ?></th>
                 <th><?= $form->textField($model,'termination_date', array("size"=>"10")); ?></th>
+                <th> </th>
                 <th colspan="2"><?= CHtml::htmlButton('Search', array('type' => 'submit', 'class' => 'action')); ?></th>
             </tr>
         </thead>
         <tfoot>
             <tr>
-                <td colspan="6">
+                <td colspan="7">
                     <a href="/job/create" class="button">+ Job</a>
                 </td>
             </tr>
