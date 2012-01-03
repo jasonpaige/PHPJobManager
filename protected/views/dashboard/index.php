@@ -71,3 +71,9 @@ $this->breadcrumbs=array(
         </tbody>
     </table>
 </div>
+
+
+<div class="contentBlock clearfix left">
+    <h2>Job Calendar</h2>
+    <?php $this->renderPartial('/job/_calendar'); ?>
+</div>

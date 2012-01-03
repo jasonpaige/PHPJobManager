@@ -1,6 +1,5 @@
 <?php
-    $user = User::model()->findByPk($data->user_id);
-    $cron = Cron\CronExpression::factory($data->cron);
+    $user = User::model()->findByPk($data->user_id);    
 ?>
 <tr class="view">
 
@@ -23,7 +22,7 @@
         <?= CHtml::encode($data->termination_date); ?>
     </td>
     <td>
-        <?= CHtml::encode($cron->getNextRunDate()->format("Y-m-d H:i:s")); ?>
+        <?= CHtml::encode($data->getNextRunDateString("Y-m-d H:i:s")); ?>
     </td>
     <td>
         <?= CHtml::link('Edit', array('/job/edit', 'id'=>$data->id)); ?>

@@ -1,6 +1,4 @@
 <?php
-require_once "protected/extensions/cron/cron.phar";
-
 class DashboardController extends Controller
 {
     public function filters()

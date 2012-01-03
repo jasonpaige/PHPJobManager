@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . "/../extensions/cron/cron.phar";
 
 /**
  * This is the model class for table "job".
@@ -102,5 +103,28 @@ class Job extends CActiveRecord
         return new CActiveDataProvider($this, array(
             'criteria'=>$criteria,
         ));
+    }
+    
+    /**
+     * Gets the next run date of this job
+     * @return DateTime | false
+     */
+    public function getNextRunDate() {
+        try {
+            $cron = Cron\CronExpression::factory($this->cron);
+            return $cron->getNextRunDate();
+        } catch (InvalidArgumentException $ex) {
+            return false;
+        }
+    }
+    
+    /**
+     * Gets the next run date of this job as a string in a format
+     * @param string $format
+     * @return string
+     */
+    public function getNextRunDateString($format) {
+        $nextRunDate = $this->getNextRunDate();        
+        return $nextRunDate ? $nextRunDate->format($format) : "Unknown";
     }
 }

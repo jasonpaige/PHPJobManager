@@ -381,8 +381,24 @@ button.subaction:active,
     box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
-
-
+.calendarContainer {
+    height: 300px;
+    overflow-y: scroll;
+}
+.calendar td {
+    border-bottom: 1px solid #ccc;
+    height: 30px;
+}
+.calendar .hour td.jobs {
+    border-bottom: 1px dashed #ccc;
+}    
+.calendar td.jobs {
+    height: 15px;
+}
+.calendar .time {
+    width: 50px;
+    text-align: center;
+}
 
 /* =============================================================================
    Non-semantic helper classes
